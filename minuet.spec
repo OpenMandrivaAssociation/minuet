@@ -29,6 +29,7 @@ BuildRequires:	cmake(KF5Bookmarks)
 BuildRequires:	cmake(KF5Codecs)
 BuildRequires:	cmake(KF5Completion)
 BuildRequires:	cmake(KF5ConfigWidgets)
+BuildRequires:	cmake(KF5Crash)
 BuildRequires:	cmake(KF5DBusAddons)
 BuildRequires:	cmake(KF5DocTools)
 BuildRequires:	cmake(KF5IconThemes)
@@ -45,7 +46,7 @@ BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(drumstick-alsa) >= 1.0.1
 
 %description
-KDE music learning application
+KDE music learning application.
 
 %files
 %{_bindir}/%{name}
