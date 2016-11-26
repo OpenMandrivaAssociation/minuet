@@ -44,6 +44,7 @@ BuildRequires:	cmake(KF5XmlGui)
 BuildRequires:	pkgconfig(shared-mime-info)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(drumstick-alsa) >= 1.0.1
+BuildRequires:	pkgconfig(fluidsynth)
 
 %description
 KDE music learning application.
@@ -51,7 +52,7 @@ KDE music learning application.
 %files
 %{_bindir}/%{name}
 %{_datadir}/applications/org.kde.%{name}.desktop
-%{_datadir}/appdata/org.kde.%{name}.appdata.xml
+%{_datadir}/metainfo/org.kde.%{name}.appdata.xml
 %{_datadir}/icons/*/*/*/*
 %{_datadir}/kxmlgui5/%{name}
 %{_datadir}/%{name}
