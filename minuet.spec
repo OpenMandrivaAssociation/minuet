@@ -1,6 +1,6 @@
 Summary:	KDE music learning application
 Name:		minuet
-Version:	16.12.2
+Version:	17.04.0
 Release:	1
 Epoch:		1
 License:	GPLv2+
@@ -49,14 +49,15 @@ BuildRequires:	pkgconfig(fluidsynth)
 %description
 KDE music learning application.
 
-%files
+%files -f %{name}.lang
 %{_bindir}/%{name}
 %{_datadir}/applications/org.kde.%{name}.desktop
 %{_datadir}/metainfo/org.kde.%{name}.appdata.xml
 %{_datadir}/icons/*/*/*/*
-%{_datadir}/kxmlgui5/%{name}
 %{_datadir}/%{name}
-%doc %{_docdir}/HTML/en/%{name}
+%{_libdir}/qt5/plugins/minuet
+
+%libpackage minuetinterfaces 0.3.0
 
 %prep
 %setup -q
@@ -67,3 +68,10 @@ KDE music learning application.
 
 %install
 %ninja_install -C build
+
+%find_lang %{name} --with-html
+
+# For now, nothing outside of minuet makes use of the interface library, so packaging its
+# interfaces doesn't make sense.
+# This may change in the future.
+rm -rf %{buildroot}%{_includedir} %{buildroot}%{_libdir}/*.so
