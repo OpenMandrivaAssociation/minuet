@@ -41,6 +41,7 @@ BuildRequires:	cmake(KF5Parts)
 BuildRequires:	cmake(KF5Service)
 BuildRequires:	cmake(KF5WidgetsAddons)
 BuildRequires:	cmake(KF5XmlGui)
+BuildRequires:	cmake(Qt5QuickControls2)
 BuildRequires:	pkgconfig(shared-mime-info)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(drumstick-alsa) >= 1.0.1
