@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   minuet-17.12.1.tar.xz: 7c2835fae992de12abf727d2a54e856068efda62
+sources:
+  minuet-17.12.2.tar.xz: 77b38042e0cb82f6ad599ccf857d4082bb4de93b
