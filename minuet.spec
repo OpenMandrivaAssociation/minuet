@@ -1,6 +1,6 @@
 Summary:	KDE music learning application
 Name:		minuet
-Version:	22.08.0
+Version:	22.08.1
 Release:	1
 Epoch:		1
 License:	GPLv2+
