@@ -1,0 +1,81 @@
+Summary:	KDE music learning application
+Name:		plasma6-minuet
+Version:	24.01.90
+Release:	3
+License:	GPLv2+
+Group:		Graphical desktop/KDE
+Url:		http://www.kde.org
+%define is_beta %(if test `echo %{version} |cut -d. -f3` -ge 70; then echo -n 1; else echo -n 0; fi)
+%if %{is_beta}
+%define ftpdir unstable
+%else
+%define ftpdir stable
+%endif
+Source0:	http://download.kde.org/%{ftpdir}/release-service/%{version}/src/minuet-%{version}.tar.xz
+BuildRequires:	cmake(ECM)
+BuildRequires:	cmake(Qt6Core)
+BuildRequires:	cmake(Qt6Gui)
+BuildRequires:	cmake(Qt6Network)
+BuildRequires:	cmake(Qt6Widgets)
+BuildRequires:	cmake(Qt6Designer)
+BuildRequires:	cmake(Qt6PrintSupport)
+BuildRequires:	cmake(Qt6Svg)
+BuildRequires:	cmake(Qt6Test)
+BuildRequires:	cmake(Qt6Qml)
+BuildRequires:	cmake(Qt6Quick)
+BuildRequires:	cmake(Qt6QuickControls2)
+BuildRequires:	cmake(Qt6Xml)
+BuildRequires:	cmake(KF6Bookmarks)
+BuildRequires:	cmake(KF6Codecs)
+BuildRequires:	cmake(KF6Completion)
+BuildRequires:	cmake(KF6ConfigWidgets)
+BuildRequires:	cmake(KF6CoreAddons)
+BuildRequires:	cmake(KF6Crash)
+BuildRequires:	cmake(KF6DBusAddons)
+BuildRequires:	cmake(KF6DocTools)
+BuildRequires:	cmake(KF6IconThemes)
+BuildRequires:	cmake(KF6I18n)
+BuildRequires:	cmake(KF6KCMUtils)
+BuildRequires:	cmake(KF6KIO)
+BuildRequires:	cmake(KF6NewStuff)
+BuildRequires:	cmake(KF6Parts)
+BuildRequires:	cmake(KF6Service)
+BuildRequires:	cmake(KF6WidgetsAddons)
+BuildRequires:	cmake(KF6XmlGui)
+BuildRequires:	cmake(Qt6QuickControls2)
+BuildRequires:	pkgconfig(shared-mime-info)
+BuildRequires:	pkgconfig(alsa)
+BuildRequires:	pkgconfig(drumstick-alsa) >= 1.0.1
+BuildRequires:	pkgconfig(fluidsynth)
+
+%description
+KDE music learning application.
+
+%files -f minuet.lang
+%{_bindir}/minuet
+%{_datadir}/applications/org.kde.minuet.desktop
+%{_datadir}/icons/*/*/*/*
+%{_datadir}/minuet
+%{_libdir}/qt6/plugins/minuet
+%{_libdir}/libminuetinterfaces.so*
+%{_datadir}/metainfo/*.xml
+
+%prep
+%autosetup -p1 -n minuet-%{?git:master}%{!?git:%{version}}
+%cmake \
+	-DQT_MAJOR_VERSION=6 \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
+	-G Ninja
+
+%build
+%ninja -C build
+
+%install
+%ninja_install -C build
+
+%find_lang minuet --with-html
+
+# For now, nothing outside of minuet makes use of the interface library, so packaging its
+# interfaces doesn't make sense.
+# This may change in the future.
+rm -rf %{buildroot}%{_includedir} %{buildroot}%{_libdir}/*.so
