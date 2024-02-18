@@ -1,7 +1,10 @@
+%define git 20240218
+%define gitbranch release/24.02
+%define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 Summary:	KDE music learning application
 Name:		plasma6-minuet
-Version:	24.01.95
-Release:	1
+Version:	24.01.96
+Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
@@ -11,7 +14,11 @@ Url:		http://www.kde.org
 %else
 %define ftpdir stable
 %endif
+%if 0%{?git:1}
+Source0:	https://invent.kde.org/education/minuet/-/archive/%{gitbranch}/minuet-%{gitbranchd}.tar.bz2#/minuet-%{git}.tar.bz2
+%else
 Source0:	http://download.kde.org/%{ftpdir}/release-service/%{version}/src/minuet-%{version}.tar.xz
+%endif
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(Qt6Core)
 BuildRequires:	cmake(Qt6Gui)
@@ -61,7 +68,7 @@ KDE music learning application.
 %{_datadir}/metainfo/*.xml
 
 %prep
-%autosetup -p1 -n minuet-%{?git:master}%{!?git:%{version}}
+%autosetup -p1 -n minuet-%{?git:%{gitbranchd}}%{!?git:%{version}}
 %cmake \
 	-DQT_MAJOR_VERSION=6 \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
