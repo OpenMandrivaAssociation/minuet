@@ -4,7 +4,7 @@
 Summary:	KDE music learning application
 Name:		plasma6-minuet
 Version:	24.02.0
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
