@@ -3,7 +3,7 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 Summary:	KDE music learning application
 Name:		minuet
-Version:	25.04.0
+Version:	25.04.3
 Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -55,10 +55,16 @@ BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(drumstick-alsa) >= 1.0.1
 BuildRequires:	pkgconfig(fluidsynth)
 
+%rename plasma6-minuet
+
+BuildSystem:	cmake
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+BuildOption:	-DQT_MAJOR_VERSION=6
+
 %description
 KDE music learning application.
 
-%files -f minuet.lang
+%files -f %{name}.lang
 %{_bindir}/minuet
 %{_datadir}/applications/org.kde.minuet.desktop
 %{_datadir}/icons/*/*/*/*
@@ -67,21 +73,7 @@ KDE music learning application.
 %{_libdir}/libminuetinterfaces.so*
 %{_datadir}/metainfo/*.xml
 
-%prep
-%autosetup -p1 -n minuet-%{?git:%{gitbranchd}}%{!?git:%{version}}
-%cmake \
-	-DQT_MAJOR_VERSION=6 \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja -C build
-
-%install
-%ninja_install -C build
-
-%find_lang minuet --with-html
-
+%install -a
 # For now, nothing outside of minuet makes use of the interface library, so packaging its
 # interfaces doesn't make sense.
 # This may change in the future.
