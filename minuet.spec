@@ -3,7 +3,7 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 Summary:	KDE music learning application
 Name:		minuet
-Version:	26.04.3
+Version:	26.08.0
 Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -30,6 +30,7 @@ BuildRequires:	cmake(Qt6Svg)
 BuildRequires:	cmake(Qt6Test)
 BuildRequires:	cmake(Qt6Qml)
 BuildRequires:	cmake(Qt6Quick)
+BuildRequires:	cmake(Qt6QuickEffects)
 BuildRequires:	cmake(Qt6QuickControls2)
 BuildRequires:	cmake(Qt6Xml)
 BuildRequires:	cmake(KF6Bookmarks)
@@ -55,6 +56,7 @@ BuildRequires:	pkgconfig(shared-mime-info)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(drumstick-alsa) >= 1.0.1
 BuildRequires:	pkgconfig(fluidsynth)
+BuildRequires:	pkgconfig(aubio)
 
 %rename plasma6-minuet
 
